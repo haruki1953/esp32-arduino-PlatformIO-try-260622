@@ -1,0 +1,13 @@
+CompileFlags:
+  # Add:
+  #   - -Wno-unknown-warning-option
+  #   - -Wno-unused-command-line-argument
+  #   - -Wno-invalid-command-line-argument
+  #   - -Wno-missing-sysroot
+  Remove:
+    - -mlongcalls
+    - -fstrict-volatile-bitfields
+    - -fno-tree-switch-conversion
+    - -fno-rtti
+    - -fexceptions
+    - -fno-exceptions

@@ -1,0 +1,8 @@
+{
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.arguments": [
+    "--compile-commands-dir=.",
+    "--query-driver=${userHome}/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-g*",
+  ],
+  "editor.formatOnSave": true,
+}
