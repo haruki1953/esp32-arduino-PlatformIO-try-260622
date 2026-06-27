@@ -1,67 +1,31 @@
 #include <Arduino.h>
+#include <OneButton.h>
+// https://github.com/mathertel/OneButton
 
-// 设置 LED 引脚
-int ledPin = 12;
-
-void TaskBlink(void *pvParameters) {
-  pinMode(12, OUTPUT);
-  while (1) {
-    digitalWrite(12, HIGH);
-    Serial.println("TaskBlink: LED ON");
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
-
-    digitalWrite(12, LOW);
-    Serial.println("TaskBlink: LED OFF");
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
-  }
-}
-
-void TaskSerial(void *pvParameters) {
-  while (1) {
-    Serial.println("TaskSerial: Running...");
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-  }
-}
+// 定义按键 GPIO（你的接线：GPIO --- 按键 --- GND）
+// OneButton btn_up(6, true);    // 亮度增加
+OneButton btn_down(15, true); // 亮度减少
+// OneButton btn_mode(19, true); // 模式切换
+// OneButton btn_call(26, true); // 呼叫按键
 
 void setup() {
   Serial.begin(115200);
-  delay(1000);
+  Serial.println("按键测试启动，按下任意按键试试…");
 
-  xTaskCreate(TaskBlink, "Blink", 2048, NULL, 1, NULL);
+  // 事件绑定（按下触发）
+  // btn_up.attachClick([]() { Serial.println("亮度增加键 按下"); });
 
-  xTaskCreate(TaskSerial, "Serial", 2048, NULL, 1, NULL);
+  btn_down.attachClick([]() { Serial.println("亮度减少键 按下"); });
+
+  // btn_mode.attachClick([]() { Serial.println("模式切换键 按下"); });
+
+  // btn_call.attachClick([]() { Serial.println("呼叫键 按下"); });
 }
 
 void loop() {
-  // loop 可以空着
+  // OneButton 需要在 loop 中不断 tick()
+  // btn_up.tick();
+  btn_down.tick();
+  // btn_mode.tick();
+  // btn_call.tick();
 }
-
-//
-
-// void setup()
-// {
-//   // 设定引脚为输出模式
-//   pinMode(ledPin, OUTPUT);
-
-//   // 初始化串口，波特率 115200（ESP32 常用）
-//   Serial.begin(115200);
-
-//   // 等待串口连接（可选）
-//   delay(1000);
-//   Serial.println("ESP32 已启动，开始闪烁 LED...");
-// }
-
-// void loop()
-// {
-//   // 点亮 LED
-//   digitalWrite(ledPin, HIGH);
-//   Serial.println("LED 已点亮aaaa");
-//   // 等待一段时间
-//   delay(1000);
-
-//   // 关闭 LED
-//   digitalWrite(ledPin, LOW);
-//   Serial.println("LED 已关闭aaaa");
-//   // 等待一段时间
-//   delay(1000);
-// }
