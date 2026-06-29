@@ -1,31 +1,22 @@
 #include <Arduino.h>
-#include <OneButton.h>
-// https://github.com/mathertel/OneButton
+// https://github.com/PaulStoffregen/OneWire
+#include <OneWire.h>
+// https://github.com/milesburton/Arduino-Temperature-Control-Library
+#include <DallasTemperature.h>
 
-// 定义按键 GPIO（你的接线：GPIO --- 按键 --- GND）
-// OneButton btn_up(6, true);    // 亮度增加
-OneButton btn_down(15, true); // 亮度减少
-// OneButton btn_mode(19, true); // 模式切换
-// OneButton btn_call(26, true); // 呼叫按键
+#define ONE_WIRE_BUS 4 // GPIO4
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("按键测试启动，按下任意按键试试…");
-
-  // 事件绑定（按下触发）
-  // btn_up.attachClick([]() { Serial.println("亮度增加键 按下"); });
-
-  btn_down.attachClick([]() { Serial.println("亮度减少键 按下"); });
-
-  // btn_mode.attachClick([]() { Serial.println("模式切换键 按下"); });
-
-  // btn_call.attachClick([]() { Serial.println("呼叫键 按下"); });
+  sensors.begin();
 }
 
 void loop() {
-  // OneButton 需要在 loop 中不断 tick()
-  // btn_up.tick();
-  btn_down.tick();
-  // btn_mode.tick();
-  // btn_call.tick();
+  sensors.requestTemperatures();
+  float tempC = sensors.getTempCByIndex(0);
+  Serial.printf("温度: %.1f °C\n", tempC);
+  delay(1000);
 }

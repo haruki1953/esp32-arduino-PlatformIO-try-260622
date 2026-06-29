@@ -1,4 +1,6 @@
+# .clangd
 CompileFlags:
+  # 解决PlatformIO项目与clangd的兼容问题
   Remove:
     - -mlongcalls
     - -fstrict-volatile-bitfields
@@ -6,3 +8,22 @@ CompileFlags:
     - -fno-rtti
     - -fexceptions
     - -fno-exceptions
+Diagnostics:
+  # 开启严格模式
+  ClangTidy:
+    Add: [
+      # bugprone-*：检测容易出 bug 的写法，例如未初始化变量、危险的指针操作等。
+      "bugprone-*",
+      # performance-*：检测低效代码，例如不必要的拷贝、低效循环等。
+      "performance-*",
+      # readability-*：提高代码可读性，例如变量命名、冗余表达式等。
+      "readability-*",
+      # modernize-*：建议使用现代 C++ 写法，例如使用 nullptr、使用 override 等。
+      "modernize-*",
+      # cppcoreguidelines-*：C++ 核心指南，提供更严格的代码规范检查。
+      "cppcoreguidelines-*",
+      # misc-*：初学者常犯的错误，例如不安全的宏、错误的比较等。
+      "misc-*",
+      # hicpp-*：更严格的 C++ 规则（High Integrity C++），适合初学者养成好习惯。
+      "hicpp-*",
+    ]
