@@ -1,3 +1,4 @@
+#include <Arduino.h>
 // fastled/FastLED@3.10.3
 // https://github.com/FastLED/FastLED
 #include <FastLED.h>

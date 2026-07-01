@@ -1,6 +1,7 @@
 #include <Arduino.h>
-#include <OneButton.h>
+// mathertel/OneButton@2.6.2
 // https://github.com/mathertel/OneButton
+#include <OneButton.h>
 
 // 定义按键 GPIO（你的接线：GPIO --- 按键 --- GND）
 // OneButton btn_up(6, true);    // 亮度增加

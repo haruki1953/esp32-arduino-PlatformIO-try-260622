@@ -1,23 +1,23 @@
 #include <Arduino.h>
 
 // 设置 LED 引脚
-int ledPin = 12;
+const int ledPin = 12;
 
 void TaskBlink(void *pvParameters) {
-  pinMode(12, OUTPUT);
-  while (1) {
-    digitalWrite(12, HIGH);
+  pinMode(ledPin, OUTPUT);
+  while (true) {
+    digitalWrite(ledPin, HIGH);
     Serial.println("TaskBlink: LED ON");
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-    digitalWrite(12, LOW);
+    digitalWrite(ledPin, LOW);
     Serial.println("TaskBlink: LED OFF");
     vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
 }
 
 void TaskSerial(void *pvParameters) {
-  while (1) {
+  while (true) {
     Serial.println("TaskSerial: Running...");
     vTaskDelay(500 / portTICK_PERIOD_MS);
   }
@@ -27,9 +27,9 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
 
-  xTaskCreate(TaskBlink, "Blink", 2048, NULL, 1, NULL);
+  xTaskCreate(TaskBlink, "Blink", 2048, nullptr, 1, nullptr);
 
-  xTaskCreate(TaskSerial, "Serial", 2048, NULL, 1, NULL);
+  xTaskCreate(TaskSerial, "Serial", 2048, nullptr, 1, nullptr);
 }
 
 void loop() {

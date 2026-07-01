@@ -26,4 +26,15 @@ Diagnostics:
       "misc-*",
       # hicpp-*：更严格的 C++ 规则（High Integrity C++），适合初学者养成好习惯。
       "hicpp-*",
+
+      # Clang 静态分析器：检测隐藏 bug，如空指针、未初始化变量、内存泄漏、逻辑路径错误等
+      "clang-analyzer-*",
+      # 跨平台检查：避免 PC 上正常但 MCU 上出问题的代码，如类型大小、字节序、对齐方式等
+      "portability-*",
+      # 并发检查：检测 FreeRTOS/多线程中的数据竞争、锁误用、原子操作问题等
+      "concurrency-*",
+      # 安全检查：发现潜在漏洞，如缓冲区溢出、不安全字符串操作、未检查返回值等
+      "security-*",
+      # Google Fuchsia 风格规则：更严格的现代 C++ 风格建议
+      "fuchsia-*",
     ]

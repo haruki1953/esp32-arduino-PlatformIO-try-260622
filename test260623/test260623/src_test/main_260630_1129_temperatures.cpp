@@ -1,6 +1,8 @@
 #include <Arduino.h>
+// paulstoffregen/OneWire@2.3.8
 // https://github.com/PaulStoffregen/OneWire
 #include <OneWire.h>
+// milesburton/DallasTemperature@4.0.6
 // https://github.com/milesburton/Arduino-Temperature-Control-Library
 #include <DallasTemperature.h>
 
